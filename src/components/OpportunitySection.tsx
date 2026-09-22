@@ -5,7 +5,6 @@ export const OpportunitySection: React.FC = () => {
     <section
       id="oportunidade-natal"
       className="relative w-full bg-[#F8FAF9] py-16 md:py-24 px-4 text-center overflow-hidden border-b border-emerald-950/5"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '650px' }}
     >
       <div
         className="absolute -top-16 left-1/2 -translate-x-1/2 w-[340px] md:w-[650px] h-[220px] pointer-events-none"

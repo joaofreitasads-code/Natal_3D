@@ -42,7 +42,6 @@ export const ExtraGallerySection: React.FC = () => {
     <section
       id="galeria-acesso"
       className="relative w-full py-14 md:py-20 overflow-hidden bg-[#041911] border-t border-emerald-900/30"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '600px' }}
     >
       <div className="absolute inset-0 pointer-events-none opacity-40">
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-600/15 rounded-full blur-3xl" />

@@ -6,7 +6,6 @@ export const BonusesSection: React.FC = () => {
     <section
       id="bonus"
       className="relative w-full bg-white py-16 md:py-24 px-4 overflow-hidden border-b border-emerald-950/5"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '800px' }}
     >
       <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center text-center">
         {/* Badge */}

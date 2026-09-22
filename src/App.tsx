@@ -15,7 +15,7 @@ import { FooterSection } from './components/FooterSection';
 
 export default function App() {
   return (
-    <main className="min-h-screen w-full bg-white text-[#0F172A] flex flex-col selection:bg-amber-300 selection:text-emerald-950 font-sans antialiased">
+    <main className="min-h-screen w-full bg-white text-[#0F172A] flex flex-col selection:bg-amber-300 selection:text-emerald-950 font-sans antialiased overflow-x-hidden">
       <HeroSection />
       <OpportunitySection />
       <InteractivePreviewSlider />

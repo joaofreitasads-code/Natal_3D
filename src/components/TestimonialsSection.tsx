@@ -18,7 +18,6 @@ export const TestimonialsSection: React.FC = () => {
     <section
       id="depoimentos"
       className="relative w-full bg-[#F8FAF9] py-16 md:py-24 px-4 overflow-hidden border-b border-emerald-950/5"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '750px' }}
     >
       <div className="max-w-4xl mx-auto relative z-10 text-center">
         {/* Stars */}

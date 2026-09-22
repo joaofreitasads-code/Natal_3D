@@ -5,7 +5,6 @@ export const GuaranteeSection: React.FC = () => {
     <section
       id="garantia"
       className="relative w-full bg-[#F8FAF9] py-16 md:py-24 px-4 overflow-hidden border-b border-emerald-950/5"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '500px' }}
     >
       <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center text-center">
         {/* Seal Image */}

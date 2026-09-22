@@ -44,8 +44,6 @@ export const MarqueeCarousel: React.FC = () => {
       id="carrossel-stl"
       className="relative w-full text-white py-16 md:py-24 overflow-hidden"
       style={{
-        contentVisibility: 'auto',
-        containIntrinsicSize: '950px',
         background:
           'radial-gradient(at 50% 15%, rgba(220, 38, 38, 0.18) 0%, rgba(11, 45, 33, 0.96) 60%, rgb(5, 24, 18) 100%), linear-gradient(rgb(9, 38, 27) 0%, rgb(5, 24, 18) 100%)',
       }}

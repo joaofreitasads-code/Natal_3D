@@ -21,8 +21,6 @@ export const PricingSection: React.FC = () => {
         id="sim"
         className="relative w-full py-16 md:py-28 px-4 overflow-hidden"
         style={{
-          contentVisibility: 'auto',
-          containIntrinsicSize: '900px',
           background:
             'radial-gradient(at 50% 18%, rgba(220, 38, 38, 0.22) 0%, rgba(6, 36, 25, 0.98) 55%, rgb(3, 20, 14) 100%), linear-gradient(rgb(7, 43, 30) 0%, rgb(3, 20, 14) 100%)',
         }}

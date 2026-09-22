@@ -5,7 +5,6 @@ export const CollectionSection: React.FC = () => {
     <section
       id="acervo-natal"
       className="relative w-full bg-white py-16 md:py-24 px-4 text-center overflow-hidden border-b border-emerald-950/5"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '700px' }}
     >
       <div className="max-w-6xl mx-auto relative z-10">
         <h2 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] mb-5 tracking-tight leading-tight max-w-4xl mx-auto">
