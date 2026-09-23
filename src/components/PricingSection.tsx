@@ -106,7 +106,7 @@ export const PricingSection: React.FC = () => {
                     width={500}
                     height={350}
                     referrerPolicy="no-referrer"
-                    src="https://i.imgur.com/VpoLfuU.png"
+                    src="/optimized/VpoLfuU.webp"
                   />
                 </div>
 

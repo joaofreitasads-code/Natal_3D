@@ -64,7 +64,7 @@ export const HeroSection: React.FC = () => {
               width="680"
               height="480"
               referrerPolicy="no-referrer"
-              src="https://i.imgur.com/M4QGwBZ.png"
+              src="/optimized/M4QGwBZ.webp"
             />
           </div>
         </div>

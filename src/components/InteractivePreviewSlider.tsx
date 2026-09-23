@@ -57,6 +57,8 @@ export const InteractivePreviewSlider: React.FC = () => {
               <img
                 key={currentModel.id}
                 alt={currentModel.title}
+                width={500}
+                height={500}
                 className="w-full h-full object-cover object-center block transition-opacity duration-300"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
                 loading="lazy"

@@ -34,7 +34,7 @@ export const OpportunitySection: React.FC = () => {
                 width="576"
                 height="576"
                 referrerPolicy="no-referrer"
-                src="https://www.centralprime3d.com.br/images/0vvwgex_6c03c807ec.jpeg"
+                src="/optimized/0vvwgex_6c03c807ec.webp"
               />
             </div>
           </div>

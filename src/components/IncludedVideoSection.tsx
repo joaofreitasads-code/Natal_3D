@@ -10,32 +10,24 @@ export const IncludedVideoSection: React.FC = () => {
   const hlsInstanceRef = useRef<any>(null);
 
   const videoStream = 'https://cdn.converteai.net/304351db-6700-41f2-96e0-9e2270c2922f/6aa18c886ce493f207c2e487/main.m3u8';
-  const posterUrl = 'https://www.centralprime3d.com.br/images/thumbnail_83a52e5a5d.jpg';
+  const posterUrl = '/optimized/thumbnail_83a52e5a5d.webp';
 
-  // Lazy load video stream only when within 300px of viewport or after user gesture
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setIsNearViewport(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '300px 0px' }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  // Initialize HLS / native stream only when needed
+  // Initialize HLS / native stream only on click
   const initVideo = useCallback(async (shouldPlay = false) => {
     const video = videoRef.current;
     if (!video || hlsInstanceRef.current || video.src) return;
 
+    // Native HLS support (Safari iOS / macOS)
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoStream;
+      video.muted = false;
+      if (shouldPlay) {
+        video.play().catch(() => {});
+      }
+      return;
+    }
+
+    // Chrome / Firefox / Android with Hls.js
     const HlsModule = await import('hls.js');
     const Hls = HlsModule.default;
 
@@ -43,34 +35,21 @@ export const IncludedVideoSection: React.FC = () => {
       const hls = new Hls({
         autoStartLoad: true,
         enableWorker: true,
-        capLevelToPlayerSize: true, // Optimizes resolution to actual mobile container size
-        maxBufferLength: 10, // Avoids downloading entire video into mobile RAM
-        maxMaxBufferLength: 20,
+        capLevelToPlayerSize: true, // Optimizes resolution to actual container size
+        maxBufferLength: 8,
+        maxMaxBufferLength: 15,
       });
       hlsInstanceRef.current = hls;
       hls.loadSource(videoStream);
       hls.attachMedia(video);
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        video.muted = true;
+        video.muted = false;
         if (shouldPlay) {
           video.play().catch(() => {});
         }
       });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoStream;
-      video.muted = true;
-      if (shouldPlay) {
-        video.play().catch(() => {});
-      }
     }
   }, [videoStream]);
-
-  // Load video stream when near viewport
-  useEffect(() => {
-    if (isNearViewport) {
-      initVideo(false);
-    }
-  }, [isNearViewport, initVideo]);
 
   // Handle timeupdate and playback states
   useEffect(() => {
@@ -167,7 +146,7 @@ export const IncludedVideoSection: React.FC = () => {
                   <video
                     ref={videoRef}
                     playsInline
-                    preload="metadata"
+                    preload="none"
                     poster={posterUrl}
                     width={340}
                     height={604}

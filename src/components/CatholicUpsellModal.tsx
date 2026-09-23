@@ -196,7 +196,12 @@ export const CatholicUpsellModal: React.FC<CatholicUpsellModalProps> = ({ isOpen
               href={CHECKOUT_URLS.completeCatholicBundle}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={onClose}
+              onClick={() => {
+                if (typeof window !== 'undefined' && (window as any).fbq) {
+                  (window as any).fbq('track', 'InitiateCheckout', { value: 36.90, currency: 'BRL', content_name: 'Combo Completo Natalino + 500 Católicos' });
+                }
+                onClose();
+              }}
               className="animate-pulse-green w-full py-2.5 sm:py-3 px-3 rounded-xl bg-gradient-to-r from-[#1EB954] via-[#22C55E] to-[#15803D] hover:from-[#22C55E] hover:to-[#166534] text-white font-black text-xs sm:text-sm uppercase tracking-wide shadow-lg border border-white/80 transition-all transform hover:scale-[1.01] active:scale-98 cursor-pointer flex flex-col items-center justify-center leading-tight gap-0.5"
             >
               <div className="flex items-center gap-1">
@@ -213,7 +218,12 @@ export const CatholicUpsellModal: React.FC<CatholicUpsellModalProps> = ({ isOpen
               href={CHECKOUT_URLS.complete}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={onClose}
+              onClick={() => {
+                if (typeof window !== 'undefined' && (window as any).fbq) {
+                  (window as any).fbq('track', 'InitiateCheckout', { value: 29.90, currency: 'BRL', content_name: 'Pack Viral Natalino Completo' });
+                }
+                onClose();
+              }}
               className="w-full py-1.5 sm:py-2 px-3 rounded-xl bg-gradient-to-r from-[#B91C1C] via-[#DC2626] to-[#991B1B] hover:from-[#DC2626] hover:to-[#7F1D1D] text-white/90 hover:text-white font-bold text-[10px] sm:text-[11px] uppercase tracking-wide border border-white/25 transition-all transform hover:scale-[1.01] active:scale-98 cursor-pointer flex items-center justify-center gap-1"
             >
               <span>❌</span>

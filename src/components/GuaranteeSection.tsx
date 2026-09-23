@@ -17,7 +17,7 @@ export const GuaranteeSection: React.FC = () => {
             width={208}
             height={208}
             referrerPolicy="no-referrer"
-            src="https://www.centralprime3d.com.br/images/616870a2fcb957627b6104d2__ff91c18bb3.webp"
+            src="/optimized/616870a2fcb957627b6104d2__ff91c18bb.webp"
           />
         </div>
 

@@ -12,6 +12,8 @@ export const ExtraGallerySection: React.FC = () => {
             <div className="w-[180px] sm:w-[210px] md:w-[240px] aspect-square rounded-[18px] sm:rounded-[20px] overflow-hidden relative group shadow-[0_8px_20px_rgba(0,0,0,0.6)] border border-emerald-500/50">
               <img
                 alt={`Modelo Natalino 3D ${idx + 1}`}
+                width={240}
+                height={240}
                 className="w-full h-full min-w-full min-h-full object-cover object-center block group-hover:scale-105 transition-transform duration-300"
                 style={{
                   width: '100%',
