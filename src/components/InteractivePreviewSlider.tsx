@@ -5,43 +5,50 @@ export const InteractivePreviewSlider: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(51.6);
   const [isMuted, setIsMuted] = useState(false);
   const [selectedModelIdx, setSelectedModelIdx] = useState<number | null>(null);
 
-  const primaryVideoSrc = '/optimized/preview_video.mp4';
-  const fallbackVideoSrc = 'https://i.imgur.com/EhpvctC.mp4';
+  const videoSrc = 'https://i.imgur.com/EhpvctC.mp4';
   const posterUrl = '/optimized/preview_video_poster.webp';
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-  };
-
-  const handleStartWithSound = () => {
+  const handleStartWithSound = async (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     const video = videoRef.current;
     if (!video) return;
 
     setHasInteracted(true);
-    video.muted = false;
-    video.volume = 1;
-    video.play().then(() => {
-      setIsPlaying(true);
-    }).catch(() => {
+
+    try {
       video.muted = false;
-      video.play().catch(() => {});
-    });
+      video.volume = 1;
+      await video.play();
+      setIsPlaying(true);
+      setIsMuted(false);
+    } catch (err) {
+      console.warn("Autoplay with sound prevented, attempting muted fallback:", err);
+      try {
+        video.muted = true;
+        setIsMuted(true);
+        await video.play();
+        setIsPlaying(true);
+      } catch (err2) {
+        console.error("Playback failed completely:", err2);
+      }
+    }
   };
 
-  const handlePlayPause = () => {
+  const handlePlayPause = async (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     const video = videoRef.current;
     if (!video) return;
 
     if (video.paused) {
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
+      try {
+        await video.play();
+        setIsPlaying(true);
+      } catch (err) {
+        console.error("Play failed:", err);
+      }
     } else {
       video.pause();
       setIsPlaying(false);
@@ -56,19 +63,6 @@ export const InteractivePreviewSlider: React.FC = () => {
     const nextMuted = !video.muted;
     video.muted = nextMuted;
     setIsMuted(nextMuted);
-  };
-
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    const video = videoRef.current;
-    if (!video || !video.duration) return;
-
-    const rect = e.currentTarget.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const width = rect.width;
-    const newPercent = Math.max(0, Math.min(1, clickX / width));
-    video.currentTime = newPercent * video.duration;
-    setProgress(newPercent * 100);
   };
 
   const handleFullscreen = (e: React.MouseEvent) => {
@@ -87,23 +81,13 @@ export const InteractivePreviewSlider: React.FC = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    const onTimeUpdate = () => {
-      if (video.duration) {
-        setProgress((video.currentTime / video.duration) * 100);
-        setCurrentTime(video.currentTime);
-        setDuration(video.duration);
-      }
-    };
-
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
 
-    video.addEventListener('timeupdate', onTimeUpdate);
     video.addEventListener('play', onPlay);
     video.addEventListener('pause', onPause);
 
     return () => {
-      video.removeEventListener('timeupdate', onTimeUpdate);
       video.removeEventListener('play', onPlay);
       video.removeEventListener('pause', onPause);
     };
@@ -158,20 +142,22 @@ export const InteractivePreviewSlider: React.FC = () => {
               <video
                 ref={videoRef}
                 playsInline
-                preload="metadata"
+                preload="auto"
                 poster={posterUrl}
+                src={videoSrc}
                 width={854}
                 height={468}
-                className="w-full h-full object-cover"
-              >
-                <source src={primaryVideoSrc} type="video/mp4" />
-                <source src={fallbackVideoSrc} type="video/mp4" />
-              </video>
+                className="w-full h-full object-cover block cursor-pointer"
+                onClick={!hasInteracted ? handleStartWithSound : handlePlayPause}
+              />
 
-              {/* Start overlay with YouTube / Play button */}
+              {/* Start overlay with YouTube / Play button (clean transparent backdrop so video image is visible) */}
               {!hasInteracted && (
-                <div className="absolute inset-0 bg-black/40 hover:bg-black/25 flex flex-col items-center justify-center p-4 z-20 backdrop-blur-[0.5px] transition-all duration-300">
-                  <div className="relative group/btn flex flex-col items-center cursor-pointer">
+                <div
+                  className="absolute inset-0 bg-transparent hover:bg-black/10 flex flex-col items-center justify-center p-4 z-20 transition-all duration-300 cursor-pointer"
+                  onClick={handleStartWithSound}
+                >
+                  <div className="relative group/btn flex flex-col items-center">
                     <div className="absolute inset-0 bg-red-600/35 rounded-full blur-xl animate-pulse pointer-events-none" />
 
                     {/* Iconic YouTube / Play button */}
@@ -204,82 +190,67 @@ export const InteractivePreviewSlider: React.FC = () => {
                 </div>
               )}
 
-              {/* Video Bottom Control Bar */}
+              {/* Video Bottom Control Bar (no progress bar, keeping clean controls) */}
               {hasInteracted && (
                 <div
-                  className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 transition-opacity duration-300 flex flex-col gap-2"
+                  className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent z-30 transition-opacity duration-300 flex items-center justify-between"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {/* Progress timeline bar */}
-                  <div
-                    className="w-full h-2 bg-white/25 hover:h-2.5 rounded-full cursor-pointer relative transition-all"
-                    onClick={handleSeek}
-                  >
-                    <div
-                      className="h-full bg-gradient-to-r from-red-600 via-amber-400 to-emerald-400 rounded-full relative"
-                      style={{ width: `${progress}%` }}
+                  <div className="flex items-center gap-2.5">
+                    {/* Play/Pause */}
+                    <button
+                      type="button"
+                      onClick={handlePlayPause}
+                      className="w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer backdrop-blur-xs"
+                      aria-label={isPlaying ? 'Pausar vídeo' : 'Reproduzir vídeo'}
                     >
-                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-white shadow-md" />
-                    </div>
-                  </div>
+                      {isPlaying ? (
+                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                        </svg>
+                      ) : (
+                        <svg className="w-3.5 h-3.5 fill-current ml-0.5" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      )}
+                    </button>
 
-                  {/* Buttons & Time */}
-                  <div className="flex items-center justify-between text-white text-xs font-semibold px-1">
-                    <div className="flex items-center gap-3">
-                      {/* Play/Pause */}
-                      <button
-                        type="button"
-                        onClick={handlePlayPause}
-                        className="w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors cursor-pointer"
-                        aria-label={isPlaying ? 'Pausar vídeo' : 'Reproduzir vídeo'}
-                      >
-                        {isPlaying ? (
-                          <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                          </svg>
-                        ) : (
-                          <svg className="w-3.5 h-3.5 fill-current ml-0.5" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
-                        )}
-                      </button>
-
-                      {/* Mute/Unmute */}
-                      <button
-                        type="button"
-                        onClick={handleToggleMute}
-                        className="w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors cursor-pointer"
-                        aria-label={isMuted ? 'Ativar som' : 'Desativar som'}
-                      >
-                        {isMuted ? (
+                    {/* Mute/Unmute */}
+                    <button
+                      type="button"
+                      onClick={handleToggleMute}
+                      className="h-8 px-3 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center gap-1.5 border border-white/20 transition-all cursor-pointer backdrop-blur-xs text-xs font-semibold"
+                      aria-label={isMuted ? 'Ativar som' : 'Desativar som'}
+                    >
+                      {isMuted ? (
+                        <>
                           <svg className="w-4 h-4 fill-current text-red-400" viewBox="0 0 24 24">
                             <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
                           </svg>
-                        ) : (
+                          <span className="text-red-300">Sem som</span>
+                        </>
+                      ) : (
+                        <>
                           <svg className="w-4 h-4 fill-current text-amber-300" viewBox="0 0 24 24">
                             <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
                           </svg>
-                        )}
-                      </button>
-
-                      {/* Time display */}
-                      <span className="text-[11px] text-slate-200">
-                        {formatTime(currentTime)} / {formatTime(duration)}
-                      </span>
-                    </div>
-
-                    {/* Fullscreen */}
-                    <button
-                      type="button"
-                      onClick={handleFullscreen}
-                      className="w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors cursor-pointer"
-                      aria-label="Tela cheia"
-                    >
-                      <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                        <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
-                      </svg>
+                          <span className="text-amber-300">Com som</span>
+                        </>
+                      )}
                     </button>
                   </div>
+
+                  {/* Fullscreen */}
+                  <button
+                    type="button"
+                    onClick={handleFullscreen}
+                    className="w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer backdrop-blur-xs"
+                    aria-label="Tela cheia"
+                  >
+                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                      <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+                    </svg>
+                  </button>
                 </div>
               )}
             </div>
