@@ -1,10 +1,11 @@
 import React from 'react';
+import { VideoPlayer } from './VideoPlayer';
 
 export const HeroSection: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative w-full text-white text-center overflow-hidden pt-12 pb-20 px-4 md:pt-16 md:pb-28 md:px-6 flex flex-col items-center"
+      className="relative w-full text-white text-center overflow-hidden pt-10 pb-16 px-4 md:pt-14 md:pb-24 md:px-6 flex flex-col items-center"
       style={{
         background:
           'radial-gradient(at 50% 10%, rgba(220, 38, 38, 0.2) 0%, rgba(11, 45, 33, 0.95) 55%, rgb(5, 24, 18) 100%), linear-gradient(rgb(9, 38, 27) 0%, rgb(5, 24, 18) 100%)',
@@ -32,7 +33,7 @@ export const HeroSection: React.FC = () => {
       {/* Category Pill */}
       <a
         href="#carrossel-stl"
-        className="relative z-10 inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 border border-amber-400/40 backdrop-blur-md px-5 py-2 rounded-full text-xs md:text-sm font-semibold tracking-wider uppercase text-amber-300 mb-6 shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+        className="relative z-10 inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 border border-amber-400/40 backdrop-blur-md px-5 py-2 rounded-full text-xs md:text-sm font-semibold tracking-wider uppercase text-amber-300 mb-5 shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
         title="Ver modelos da Coleção de Natal 2026"
       >
         <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_10px_#FBBF24] animate-pulse" />
@@ -40,36 +41,24 @@ export const HeroSection: React.FC = () => {
       </a>
 
       {/* Main Headline */}
-      <h1 className="relative z-10 font-cinzel text-2xl sm:text-3xl md:text-5xl font-extrabold max-w-5xl mx-auto leading-tight md:leading-tight mb-8 md:mb-10 tracking-tight text-white drop-shadow-sm">
-        100 Arquivos STL Natalinos para você imprimir,{' '}
+      <h1 className="relative z-10 font-cinzel text-2xl sm:text-3xl md:text-5xl font-extrabold max-w-5xl mx-auto leading-tight md:leading-tight mb-6 md:mb-8 tracking-tight text-white drop-shadow-sm">
+        Transforme sua impressora 3D em{' '}
         <span className="text-amber-300 bg-gradient-to-r from-amber-100 via-amber-300 to-amber-500 bg-clip-text text-transparent font-black drop-shadow-[0_2px_12px_rgba(245,158,11,0.35)]">
-          vender e lucrar com sua impressora 3D neste fim de ano
-        </span>
+          renda extra neste Natal
+        </span>{' '}
+        com 100 arquivos STL prontos
       </h1>
 
-      {/* Hero Showcase Image */}
-      <div className="relative z-10 w-full max-w-2xl lg:max-w-3xl mx-auto mb-8 flex flex-col items-center px-4">
-        <div className="relative w-full flex justify-center items-center">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 max-w-lg mx-auto h-3/4 top-1/2 -translate-y-1/2 bg-radial from-amber-400/20 via-emerald-500/10 to-transparent blur-3xl pointer-events-none -z-10"
-          />
-          <div className="w-full flex justify-center">
-            <img
-              alt="100 Arquivos STL Natalinos para Impressão 3D"
-              className="w-full h-auto max-h-[520px] sm:max-h-[600px] md:max-h-[680px] object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.75)] select-none pointer-events-none"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-              width="680"
-              height="480"
-              referrerPolicy="no-referrer"
-              src="/optimized/M4QGwBZ.webp"
-            />
-          </div>
+      {/* Video Presentation at the beginning of the page */}
+      <div id="video-apresentacao" className="relative z-10 w-full max-w-[360px] mx-auto mb-6 flex flex-col items-center px-2">
+        <div className="flex items-center gap-2 font-bold text-amber-300 text-sm md:text-base mb-3 drop-shadow-sm">
+          <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-blink-dot" />
+          Assista para conhecer 👇
         </div>
 
-        <div className="mt-3 bg-[#051812]/90 border border-amber-400/40 backdrop-blur-md px-4 py-2 rounded-full flex items-center gap-2 text-white text-xs sm:text-sm font-semibold shadow-xl">
+        <VideoPlayer />
+
+        <div className="mt-3.5 bg-[#051812]/90 border border-amber-400/40 backdrop-blur-md px-4 py-1.5 rounded-full flex items-center gap-2 text-white text-xs sm:text-sm font-semibold shadow-xl">
           <svg className="w-4 h-4 text-amber-400 fill-current shrink-0" viewBox="0 0 24 24">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
           </svg>
@@ -78,7 +67,7 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* Description */}
-      <div className="relative z-10 max-w-3xl mx-auto mb-9 px-3 mt-4">
+      <div className="relative z-10 max-w-3xl mx-auto mb-7 px-3">
         <p className="text-base sm:text-lg md:text-xl leading-relaxed text-slate-100 font-normal">
           Receba uma coleção exclusiva com{' '}
           <strong className="font-bold text-amber-300">100 modelos STL Natalinos</strong>, prontos

@@ -1,117 +1,10 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React from 'react';
 
 export const IncludedVideoSection: React.FC = () => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [isNearViewport, setIsNearViewport] = useState(false);
-  const hlsInstanceRef = useRef<any>(null);
-
-  const videoStream = 'https://cdn.converteai.net/304351db-6700-41f2-96e0-9e2270c2922f/6aa18c886ce493f207c2e487/main.m3u8';
-  const posterUrl = '/optimized/thumbnail_83a52e5a5d.webp';
-
-  // Initialize HLS / native stream only on click
-  const initVideo = useCallback(async (shouldPlay = false) => {
-    const video = videoRef.current;
-    if (!video || hlsInstanceRef.current || video.src) return;
-
-    // Native HLS support (Safari iOS / macOS)
-    if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoStream;
-      video.muted = false;
-      if (shouldPlay) {
-        video.play().catch(() => {});
-      }
-      return;
-    }
-
-    // Chrome / Firefox / Android with Hls.js
-    const HlsModule = await import('hls.js');
-    const Hls = HlsModule.default;
-
-    if (Hls.isSupported()) {
-      const hls = new Hls({
-        autoStartLoad: true,
-        enableWorker: true,
-        capLevelToPlayerSize: true, // Optimizes resolution to actual container size
-        maxBufferLength: 8,
-        maxMaxBufferLength: 15,
-      });
-      hlsInstanceRef.current = hls;
-      hls.loadSource(videoStream);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        video.muted = false;
-        if (shouldPlay) {
-          video.play().catch(() => {});
-        }
-      });
-    }
-  }, [videoStream]);
-
-  // Handle timeupdate and playback states
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const updateProgress = () => {
-      if (video.duration) {
-        setProgress((video.currentTime / video.duration) * 100);
-      }
-    };
-
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-
-    video.addEventListener('timeupdate', updateProgress);
-    video.addEventListener('play', handlePlay);
-    video.addEventListener('pause', handlePause);
-
-    return () => {
-      video.removeEventListener('timeupdate', updateProgress);
-      video.removeEventListener('play', handlePlay);
-      video.removeEventListener('pause', handlePause);
-      if (hlsInstanceRef.current) {
-        hlsInstanceRef.current.destroy();
-        hlsInstanceRef.current = null;
-      }
-    };
-  }, []);
-
-  const handleToggleSoundAndPlay = async () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    setHasInteracted(true);
-
-    if (!hlsInstanceRef.current && !video.src) {
-      await initVideo(true);
-    }
-
-    video.muted = false;
-    video.play().then(() => {
-      setIsPlaying(true);
-    }).catch(() => {});
-  };
-
-  const handlePlayPause = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (video.paused) {
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
-    } else {
-      video.pause();
-      setIsPlaying(false);
-    }
-  };
-
   return (
     <section
-      ref={containerRef}
-      className="relative w-full bg-white py-16 md:py-24 px-4 overflow-hidden border-b border-emerald-950/5"
+      id="o-que-voce-recebe"
+      className="relative w-full bg-white py-14 md:py-20 px-4 overflow-hidden border-b border-emerald-950/5"
     >
       <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center">
         {/* Top badge */}
@@ -130,83 +23,34 @@ export const IncludedVideoSection: React.FC = () => {
             ✦ VEJA TUDO O QUE VOCÊ VAI RECEBER:
           </h3>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 items-start">
-            {/* Video Column */}
-            <div className="lg:col-span-5 flex flex-col items-center w-full max-w-[340px] mx-auto">
-              <div className="flex items-center gap-2 font-bold text-red-700 text-sm md:text-base mb-3">
-                <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-blink-dot" />
-                Assista para conhecer 👇
-              </div>
-
-              <div className="w-full">
-                <div
-                  className="relative w-full aspect-[9/16] bg-black rounded-[23px] overflow-hidden cursor-pointer shadow-2xl group select-none"
-                  onClick={!hasInteracted ? handleToggleSoundAndPlay : handlePlayPause}
-                >
-                  <video
-                    ref={videoRef}
-                    playsInline
-                    preload="none"
-                    poster={posterUrl}
-                    width={340}
-                    height={604}
-                    className="w-full h-full object-cover"
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 items-center">
+            {/* Bundle Mockup Column */}
+            <div className="lg:col-span-5 flex flex-col items-center w-full max-w-[380px] mx-auto">
+              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-emerald-900/20 bg-gradient-to-b from-[#062419] to-[#051812] p-5 text-center">
+                <div className="relative w-full flex justify-center items-center py-2">
+                  <img
+                    alt="100 Modelos STL Natalinos - Pacote Completo"
+                    className="w-full h-auto max-h-[340px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)] select-none pointer-events-none"
+                    loading="lazy"
+                    decoding="async"
+                    width={380}
+                    height={280}
+                    src="/optimized/M4QGwBZ.webp"
                   />
-
-                  {/* Audio Overlay Banner (appears until clicked to unmute) */}
-                  {!hasInteracted && (
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-4 z-20 backdrop-blur-[1px] transition-opacity">
-                      <div className="bg-[#521987]/85 border-2 border-white/90 rounded-2xl p-5 text-center text-white max-w-[280px] shadow-2xl animate-pulse">
-                        <p className="font-bold text-lg mb-2 leading-tight">Seu vídeo já começou</p>
-                        <div className="my-3 flex justify-center">
-                          <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center animate-bounce">
-                            <svg className="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
-                              <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-                            </svg>
-                          </div>
-                        </div>
-                        <p className="font-extrabold text-sm uppercase tracking-wide text-yellow-300">
-                          Clique para ouvir 🔊
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Play/Pause Button */}
-                  {hasInteracted && (
-                    <div className="absolute bottom-4 left-4 z-30 flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handlePlayPause();
-                        }}
-                        className="w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-sm transition-transform active:scale-95 border border-white/20"
-                        aria-label={isPlaying ? 'Pausar' : 'Reproduzir'}
-                      >
-                        {isPlaying ? (
-                          <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                          </svg>
-                        ) : (
-                          <svg className="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
-                        )}
-                      </button>
-                    </div>
-                  )}
-
-                  {/* Progress Bar */}
-                  <div className="absolute bottom-0 left-0 right-0 h-[6px] bg-black/40 z-30">
-                    <div
-                      className="h-full bg-[#521987] transition-all duration-300 relative"
-                      style={{ width: `${progress}%` }}
-                    >
-                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-white shadow-sm" />
-                    </div>
-                  </div>
                 </div>
+                <div className="mt-2 bg-white/10 border border-amber-400/40 backdrop-blur-md px-3.5 py-1.5 rounded-full inline-flex items-center gap-2 text-amber-300 text-xs font-bold">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  100 Modelos Testados e Prontos
+                </div>
+                <p className="text-slate-200 text-xs mt-3 leading-relaxed font-medium">
+                  Acesso imediato à pasta organizada com arquivos .STL em alta resolução para fatiamento em qualquer impressora 3D.
+                </p>
+                <a
+                  href="#video-apresentacao"
+                  className="mt-4 inline-flex items-center gap-1.5 text-xs text-amber-300 hover:text-amber-200 font-bold transition-all hover:scale-105"
+                >
+                  <span>▲ Rever vídeo de apresentação no topo</span>
+                </a>
               </div>
             </div>
 
