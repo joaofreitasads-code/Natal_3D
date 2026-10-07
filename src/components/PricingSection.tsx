@@ -22,14 +22,14 @@ export const PricingSection: React.FC = () => {
         className="relative w-full py-16 md:py-28 px-4 overflow-hidden"
         style={{
           background:
-            'radial-gradient(at 50% 18%, rgba(220, 38, 38, 0.22) 0%, rgba(6, 36, 25, 0.98) 55%, rgb(3, 20, 14) 100%), linear-gradient(rgb(7, 43, 30) 0%, rgb(3, 20, 14) 100%)',
+            'radial-gradient(at 50% 18%, rgba(254, 202, 202, 0.15) 0%, rgba(220, 38, 38, 0.45) 25%, rgba(153, 27, 27, 0.96) 60%, rgb(95, 11, 19) 100%), linear-gradient(rgb(136, 19, 31) 0%, rgb(88, 10, 17) 100%)',
         }}
       >
         <div
           className="absolute inset-0 pointer-events-none opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle at 1px 1px, rgba(245, 158, 11, 0.15) 1.2px, transparent 0px)',
+              'radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.25) 1.2px, transparent 0px)',
             backgroundSize: '32px 32px',
           }}
         />
@@ -38,37 +38,37 @@ export const PricingSection: React.FC = () => {
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-black text-white text-center mb-2 tracking-tight uppercase">
             ESCOLHA SEU ACESSO
           </h2>
-          <p className="text-sm sm:text-base text-slate-300 text-center mb-10 md:mb-14 max-w-xl font-normal">
+          <p className="text-sm sm:text-base text-slate-100 text-center mb-10 md:mb-14 max-w-xl font-normal">
             Inicie sua produção e vendas de modelos 3D natalinos agora mesmo.
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-4xl items-stretch">
             {/* Basic Plan */}
-            <div className="lg:col-span-5 bg-black/45 border border-white/15 rounded-[22px] p-6 sm:p-8 flex flex-col justify-between text-left shadow-xl backdrop-blur-md relative transition-all duration-300 hover:border-white/25">
+            <div className="lg:col-span-5 bg-black/45 border border-white/20 rounded-[22px] p-6 sm:p-8 flex flex-col justify-between text-left shadow-xl backdrop-blur-md relative transition-all duration-300 hover:border-white/30">
               <div>
-                <h3 className="text-xs uppercase tracking-[0.2em] text-slate-400 font-extrabold mb-3">
+                <h3 className="text-xs uppercase tracking-[0.2em] text-slate-300 font-extrabold mb-3">
                   PLANO BÁSICO
                 </h3>
                 <div className="mb-8">
                   <span className="font-cinzel text-3xl sm:text-4xl font-black text-white tracking-tight">
                     R$ 10,90
                   </span>
-                  <span className="block text-[11px] text-slate-400 uppercase tracking-wider font-semibold mt-1">
+                  <span className="block text-[11px] text-slate-300 uppercase tracking-wider font-semibold mt-1">
                     PAGAMENTO ÚNICO
                   </span>
                 </div>
 
-                <ul className="flex flex-col gap-4 text-xs sm:text-sm text-slate-300">
+                <ul className="flex flex-col gap-4 text-xs sm:text-sm text-slate-200">
                   <li className="flex items-start gap-2.5">
-                    <span className="text-slate-500 font-bold shrink-0">✓</span>
+                    <span className="text-slate-400 font-bold shrink-0">✓</span>
                     <span>Pack com +100 arquivos STL</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-slate-400">
-                    <span className="text-slate-500 font-bold shrink-0">✓</span>
+                    <span className="text-slate-500 font-bold shrink-0">✕</span>
                     <span>Sem os Bônus inclusos</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-slate-500 font-bold shrink-0">✓</span>
+                    <span className="text-slate-400 font-bold shrink-0">✓</span>
                     <span>6 meses de acesso</span>
                   </li>
                 </ul>
@@ -78,7 +78,7 @@ export const PricingSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsBasicDiscountModalOpen(true)}
-                  className="block w-full py-3.5 px-4 rounded-xl border border-slate-700 hover:border-slate-500 bg-transparent hover:bg-slate-800/60 text-slate-200 hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 text-center cursor-pointer active:scale-98"
+                  className="block w-full py-3.5 px-4 rounded-xl border border-white/40 hover:border-white bg-transparent hover:bg-white/10 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 text-center cursor-pointer active:scale-98"
                 >
                   COMEÇAR PELO BÁSICO
                 </button>
@@ -86,8 +86,8 @@ export const PricingSection: React.FC = () => {
             </div>
 
             {/* Full Plan (Featured) */}
-            <div className="lg:col-span-7 relative p-1 rounded-[26px] bg-gradient-to-br from-amber-300 via-red-500 to-emerald-500 shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_45px_rgba(245,158,11,0.35)]">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-300 via-red-500 to-emerald-600 text-white font-black text-[11px] sm:text-xs px-5 py-1.5 rounded-full uppercase tracking-wider shadow-lg whitespace-nowrap z-20 flex items-center gap-1.5 border border-white/80">
+            <div className="lg:col-span-7 relative p-1 rounded-[26px] bg-gradient-to-br from-amber-300 via-rose-500 to-red-600 shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_45px_rgba(220,38,38,0.45)]">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-red-600 via-rose-600 to-amber-500 text-white font-black text-[11px] sm:text-xs px-5 py-1.5 rounded-full uppercase tracking-wider shadow-lg whitespace-nowrap z-20 flex items-center gap-1.5 border border-white/90">
                 <span>🏆</span>
                 <span>MAIS ESCOLHIDO</span>
               </div>
@@ -137,7 +137,7 @@ export const PricingSection: React.FC = () => {
                     'Garantia incondicional de 15 dias',
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-start gap-2.5 text-slate-900 font-semibold">
-                      <span className="text-emerald-600 font-black text-base leading-none">✓</span>
+                      <span className="text-red-600 font-black text-base leading-none">✓</span>
                       <span>{item}</span>
                     </div>
                   ))}
@@ -146,7 +146,7 @@ export const PricingSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsCatholicModalOpen(true)}
-                  className="w-full py-4 px-6 rounded-xl bg-[#00C853] hover:bg-[#00B248] text-white font-black text-sm sm:text-base md:text-lg uppercase tracking-wider shadow-[0_10px_25px_rgba(0,200,83,0.4)] transition-all transform hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(0,200,83,0.5)] text-center cursor-pointer active:scale-98"
+                  className="animate-pulse-neon w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#00E676] via-[#00FF66] to-[#05DF72] hover:from-[#00FF66] hover:to-[#00E676] text-slate-950 font-black text-sm sm:text-base md:text-lg uppercase tracking-wider shadow-[0_0_30px_rgba(0,255,102,0.65),0_10px_25px_rgba(0,0,0,0.4)] border-2 border-white transition-all transform hover:-translate-y-0.5 hover:scale-[1.02] active:scale-98 text-center cursor-pointer"
                 >
                   QUERO O PLANO COMPLETO
                 </button>

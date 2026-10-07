@@ -47,14 +47,14 @@ export const MarqueeCarousel: React.FC = () => {
       className="relative w-full text-white py-16 md:py-24 overflow-hidden"
       style={{
         background:
-          'radial-gradient(at 50% 15%, rgba(220, 38, 38, 0.18) 0%, rgba(11, 45, 33, 0.96) 60%, rgb(5, 24, 18) 100%), linear-gradient(rgb(9, 38, 27) 0%, rgb(5, 24, 18) 100%)',
+          'radial-gradient(at 50% 15%, rgba(254, 202, 202, 0.15) 0%, rgba(220, 38, 38, 0.45) 25%, rgba(153, 27, 27, 0.96) 60%, rgb(95, 11, 19) 100%), linear-gradient(rgb(136, 19, 31) 0%, rgb(88, 10, 17) 100%)',
       }}
     >
       <div
         className="absolute inset-0 pointer-events-none opacity-40"
         style={{
           backgroundImage:
-            'radial-gradient(circle at 1px 1px, rgba(245, 158, 11, 0.12) 1.2px, transparent 0px)',
+            'radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.25) 1.2px, transparent 0px)',
           backgroundSize: '32px 32px',
         }}
       />
@@ -63,15 +63,15 @@ export const MarqueeCarousel: React.FC = () => {
         <h2 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3">
           Modelos Que Encantam e Vendem no Natal
         </h2>
-        <p className="text-sm sm:text-base text-slate-200 max-w-2xl mx-auto font-normal">
+        <p className="text-sm sm:text-base text-slate-100 max-w-2xl mx-auto font-normal">
           Veja em detalhes os modelos STL prontos para imprimir e lucrar neste fim de ano
         </p>
       </div>
 
       <div className="relative w-full overflow-hidden marquee-container flex flex-col gap-4 md:gap-6 pointer-events-none select-none">
         {/* Left & Right gradient masks for smooth fade */}
-        <div className="absolute top-0 bottom-0 left-0 w-16 md:w-32 bg-gradient-to-r from-[#051812] to-transparent z-20 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-16 md:w-32 bg-gradient-to-l from-[#051812] to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 left-0 w-16 md:w-32 bg-gradient-to-r from-[#5f0b13] to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-16 md:w-32 bg-gradient-to-l from-[#5f0b13] to-transparent z-20 pointer-events-none" />
 
         {renderRow(MARQUEE_ROW_1, 'marquee-to-right', '26s')}
         {renderRow(MARQUEE_ROW_2, 'marquee-to-left', '24s')}

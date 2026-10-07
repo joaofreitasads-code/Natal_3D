@@ -4,20 +4,23 @@ export const GuaranteeSection: React.FC = () => {
   return (
     <section
       id="garantia"
-      className="relative w-full bg-[#F8FAF9] py-16 md:py-24 px-4 overflow-hidden border-b border-emerald-950/5"
+      className="relative w-full bg-white py-16 md:py-24 px-4 overflow-hidden border-b border-red-100/60"
     >
       <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center text-center">
         {/* Seal Image */}
         <div className="w-36 sm:w-44 md:w-52 aspect-square mb-6 drop-shadow-xl hover:scale-105 transition-transform duration-300">
           <img
-            alt="Selo de Garantia de 7 Dias Incondicional"
+            alt="Selo de Garantia Incondicional"
             className="w-full h-full object-contain"
             loading="lazy"
             decoding="async"
             width={208}
             height={208}
             referrerPolicy="no-referrer"
-            src="/optimized/616870a2fcb957627b6104d2__ff91c18bb.webp"
+            src="/optimized/HKbI3yl.webp"
+            onError={(e) => {
+              e.currentTarget.src = 'https://i.imgur.com/HKbI3yl.png';
+            }}
           />
         </div>
 
@@ -30,7 +33,7 @@ export const GuaranteeSection: React.FC = () => {
             Você tem <strong className="font-bold text-red-700">7 dias de garantia incondicional</strong> para avaliar todo o material.
           </p>
           <p>
-            Acesse os <strong className="font-bold text-[#0F172A]">100 arquivos STL Natalinos</strong> hoje. Se por qualquer motivo você achar que os modelos não são perfeitos para o seu negócio, basta solicitar o reembolso e <strong className="font-bold text-emerald-800">devolvemos 100% do seu dinheiro.</strong>
+            Acesse os <strong className="font-bold text-[#0F172A]">100 arquivos STL Natalinos</strong> hoje. Se por qualquer motivo você achar que os modelos não são perfeitos para o seu negócio, basta solicitar o reembolso e <strong className="font-bold text-red-700">devolvemos 100% do seu dinheiro.</strong>
           </p>
           <p>
             Sem letras miúdas e sem burocracia. <strong className="font-bold text-[#0F172A]">O risco é todo nosso.</strong>
@@ -42,10 +45,10 @@ export const GuaranteeSection: React.FC = () => {
 
         <a
           href="#sim"
-          className="animate-pulse-green inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-emerald-500 via-emerald-600 to-green-700 hover:from-emerald-400 hover:to-green-600 text-white font-extrabold text-xs sm:text-sm md:text-base py-3.5 px-6 sm:px-8 rounded-full uppercase tracking-wider shadow-[0_10px_25px_rgba(16,185,129,0.35)] border-2 border-white transition-all transform hover:-translate-y-1 hover:scale-[1.02] max-w-md w-full mb-8 text-center cursor-pointer"
+          className="animate-pulse-neon inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#00E676] via-[#00FF66] to-[#05DF72] hover:from-[#00FF66] hover:to-[#00E676] text-slate-950 font-black text-xs sm:text-sm md:text-base py-3.5 px-6 sm:px-8 rounded-full uppercase tracking-wider shadow-[0_0_25px_rgba(0,255,102,0.65),0_10px_25px_rgba(0,0,0,0.5)] border-2 border-white transition-all transform hover:-translate-y-1 hover:scale-[1.03] active:scale-98 max-w-md w-full mb-8 text-center cursor-pointer"
         >
           <span>QUERO GARANTIR MEU ACESSO SEGURO</span>
-          <svg className="w-4 h-4 sm:w-5 sm:h-5 stroke-current stroke-[2.5] fill-none shrink-0" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 stroke-current stroke-[3] fill-none shrink-0" viewBox="0 0 24 24">
             <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" strokeLinejoin="round" />
             <polyline points="12 5 19 12 12 19" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -53,15 +56,15 @@ export const GuaranteeSection: React.FC = () => {
 
         <div className="flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm text-slate-500 font-medium border-t border-slate-200 pt-6 w-full">
           <div className="flex items-center gap-2">
-            <span className="text-emerald-700">🛡️</span>
+            <span className="text-red-700">🛡️</span>
             <span>Satisfação Garantida</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-emerald-700">🔒</span>
+            <span className="text-red-700">🔒</span>
             <span>Checkout 100% Seguro</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-emerald-700">♾️</span>
+            <span className="text-red-700">♾️</span>
             <span>Acesso Vitalício</span>
           </div>
         </div>

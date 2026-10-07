@@ -12,7 +12,7 @@ export const FaqSection: React.FC = () => {
   return (
     <section
       id="faq"
-      className="relative w-full bg-white py-16 md:py-24 px-4 overflow-hidden border-b border-emerald-950/5"
+      className="relative w-full bg-white py-16 md:py-24 px-4 overflow-hidden border-b border-red-100/60"
     >
       <div className="max-w-3xl mx-auto relative z-10">
         <h2 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] text-center mb-12 tracking-tight">
@@ -32,7 +32,7 @@ export const FaqSection: React.FC = () => {
                 key={faq.id}
                 className={`border rounded-[22px] overflow-hidden transition-all duration-200 ${
                   isOpen
-                    ? 'border-emerald-500/40 bg-[#F8FAF9] shadow-[0_4px_20px_rgba(15,23,42,0.05)]'
+                    ? 'border-red-400/50 bg-red-50/30 shadow-[0_4px_20px_rgba(220,38,38,0.06)]'
                     : 'border-slate-200/90 bg-white hover:border-slate-300 shadow-xs'
                 }`}
               >
@@ -46,7 +46,7 @@ export const FaqSection: React.FC = () => {
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
                       isOpen
-                        ? 'rotate-180 bg-[#062419] text-amber-300 shadow-xs'
+                        ? 'rotate-180 bg-red-700 text-white shadow-xs'
                         : 'bg-slate-100 text-slate-600'
                     }`}
                   >

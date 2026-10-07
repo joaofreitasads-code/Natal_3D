@@ -15,7 +15,7 @@ export const BasicDiscountModal: React.FC<BasicDiscountModalProps> = ({ isOpen, 
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-xs sm:max-w-sm p-0.5 sm:p-1 rounded-[22px] bg-gradient-to-br from-[#FFE494] via-[#D41C2C] to-[#0E3A24] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_30px_rgba(247,208,112,0.3)] my-auto"
+        className="relative w-full max-w-xs sm:max-w-sm p-0.5 sm:p-1 rounded-[22px] bg-gradient-to-br from-[#FFE494] via-[#D41C2C] to-[#7F1D1D] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_30px_rgba(247,208,112,0.3)] my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="bg-[#190507] rounded-[20px] p-3 sm:p-4 md:p-5 flex flex-col items-center text-center relative max-h-[95vh]">
@@ -74,7 +74,7 @@ export const BasicDiscountModal: React.FC<BasicDiscountModalProps> = ({ isOpen, 
                 }
                 onClose();
               }}
-              className="animate-pulse-green w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#1EB954] via-[#22C55E] to-[#15803D] hover:from-[#22C55E] hover:to-[#166534] text-white font-black text-xs uppercase tracking-wide shadow-md border border-white/80 transition-all text-center flex items-center justify-center gap-1 cursor-pointer"
+              className="animate-pulse-neon w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#00E676] via-[#00FF66] to-[#05DF72] hover:from-[#00FF66] hover:to-[#00E676] text-slate-950 font-black text-xs uppercase tracking-wide shadow-md border border-white transition-all text-center flex items-center justify-center gap-1 cursor-pointer"
             >
               <span>✅</span>
               <span>SIM! QUERO O COMPLETO POR R$ 18,90</span>

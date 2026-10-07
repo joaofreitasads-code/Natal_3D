@@ -16,6 +16,15 @@ export default defineConfig(() => {
       cssMinify: true,
       minify: 'esbuild' as const,
       chunkSizeWarningLimit: 1000,
+      rollupOptions: {
+        output: {
+          manualChunks(id: string) {
+            if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+              return 'vendor-react';
+            }
+          },
+        },
+      },
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.

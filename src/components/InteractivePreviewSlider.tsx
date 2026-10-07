@@ -8,11 +8,24 @@ export const InteractivePreviewSlider: React.FC = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [selectedModelIdx, setSelectedModelIdx] = useState<number | null>(null);
 
-  const videoSrc = 'https://i.imgur.com/EhpvctC.mp4';
+  const primaryVideoSrc = '/optimized/preview_video.mp4';
+  const fallbackVideoSrc = 'https://i.imgur.com/EhpvctC.mp4';
   const posterUrl = '/optimized/preview_video_poster.webp';
 
+  const [currentSrc, setCurrentSrc] = useState(primaryVideoSrc);
+
+  const handleVideoError = () => {
+    if (currentSrc !== fallbackVideoSrc) {
+      console.warn('Switching preview video to fallback URL:', fallbackVideoSrc);
+      setCurrentSrc(fallbackVideoSrc);
+    }
+  };
+
   const handleStartWithSound = async (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     const video = videoRef.current;
     if (!video) return;
 
@@ -25,20 +38,31 @@ export const InteractivePreviewSlider: React.FC = () => {
       setIsPlaying(true);
       setIsMuted(false);
     } catch (err) {
-      console.warn("Autoplay with sound prevented, attempting muted fallback:", err);
+      console.warn('Autoplay with sound prevented, attempting muted fallback:', err);
       try {
         video.muted = true;
         setIsMuted(true);
         await video.play();
         setIsPlaying(true);
       } catch (err2) {
-        console.error("Playback failed completely:", err2);
+        console.error('Playback failed completely:', err2);
+        if (currentSrc !== fallbackVideoSrc) {
+          setCurrentSrc(fallbackVideoSrc);
+          setTimeout(() => {
+            if (videoRef.current) {
+              videoRef.current.play().catch((e) => console.error(e));
+            }
+          }, 150);
+        }
       }
     }
   };
 
   const handlePlayPause = async (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     const video = videoRef.current;
     if (!video) return;
 
@@ -47,7 +71,7 @@ export const InteractivePreviewSlider: React.FC = () => {
         await video.play();
         setIsPlaying(true);
       } catch (err) {
-        console.error("Play failed:", err);
+        console.error('Play failed:', err);
       }
     } else {
       video.pause();
@@ -99,7 +123,7 @@ export const InteractivePreviewSlider: React.FC = () => {
       className="relative w-full text-white py-16 md:py-24 px-4 text-center overflow-hidden"
       style={{
         background:
-          'radial-gradient(at 50% 15%, rgba(220, 38, 38, 0.18) 0%, rgba(11, 45, 33, 0.96) 60%, rgb(5, 24, 18) 100%), linear-gradient(rgb(9, 38, 27) 0%, rgb(5, 24, 18) 100%)',
+          'radial-gradient(at 50% 15%, rgba(254, 202, 202, 0.15) 0%, rgba(220, 38, 38, 0.45) 25%, rgba(153, 27, 27, 0.96) 60%, rgb(95, 11, 19) 100%), linear-gradient(rgb(136, 19, 31) 0%, rgb(88, 10, 17) 100%)',
       }}
     >
       {/* Background Dots */}
@@ -107,7 +131,7 @@ export const InteractivePreviewSlider: React.FC = () => {
         className="absolute inset-0 pointer-events-none opacity-40"
         style={{
           backgroundImage:
-            'radial-gradient(circle at 1px 1px, rgba(245, 158, 11, 0.15) 1.2px, transparent 0px)',
+            'radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.25) 1.2px, transparent 0px)',
           backgroundSize: '32px 32px',
         }}
       />
@@ -115,8 +139,8 @@ export const InteractivePreviewSlider: React.FC = () => {
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Section Heading */}
         <div className="mb-8">
-          <div className="inline-flex items-center gap-2 bg-[#051812]/90 border border-amber-400/50 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-amber-300 uppercase mb-4 shadow-lg">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+          <div className="inline-flex items-center gap-2 bg-white/20 border border-white/60 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-white uppercase mb-4 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-amber-300 animate-ping" />
             <span>🎥 VÍDEO DEMONSTRATIVO DAS PEÇAS</span>
           </div>
 
@@ -127,28 +151,34 @@ export const InteractivePreviewSlider: React.FC = () => {
               <span className="absolute -bottom-1 left-0 w-full h-1 md:h-1.5 rounded-full bg-gradient-to-r from-amber-400 to-red-500" />
             </span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-slate-200 font-normal max-w-3xl mx-auto leading-relaxed mt-4">
+          <p className="text-base sm:text-lg md:text-xl text-slate-100 font-normal max-w-3xl mx-auto leading-relaxed mt-4">
             Modelos STL Natalinos prontos para produzir e vender, ideais para montar seu catálogo de fim de ano com peças criativas e de altíssimo valor percebido.
           </p>
         </div>
 
         {/* Video Player Container */}
         <div className="relative max-w-3xl mx-auto select-none">
-          <div className="relative p-[3px] sm:p-1.5 rounded-[26px] bg-gradient-to-br from-amber-300 via-red-500 to-emerald-500 shadow-[0_20px_50px_rgba(0,0,0,0.7),0_0_35px_rgba(16,185,129,0.25)]">
+          <div className="relative p-[3px] sm:p-1.5 rounded-[26px] bg-gradient-to-br from-amber-300 via-rose-500 to-red-600 shadow-[0_20px_50px_rgba(0,0,0,0.7),0_0_35px_rgba(220,38,38,0.35)]">
             <div
               className="bg-black rounded-[22px] overflow-hidden aspect-video flex items-center justify-center relative cursor-pointer group"
+              onMouseEnter={() => {
+                if (videoRef.current && videoRef.current.preload !== 'auto') videoRef.current.preload = 'auto';
+              }}
+              onTouchStart={() => {
+                if (videoRef.current && videoRef.current.preload !== 'auto') videoRef.current.preload = 'auto';
+              }}
               onClick={!hasInteracted ? handleStartWithSound : handlePlayPause}
             >
               <video
                 ref={videoRef}
                 playsInline
-                preload="auto"
+                preload="metadata"
                 poster={posterUrl}
-                src={videoSrc}
+                src={currentSrc}
+                onError={handleVideoError}
                 width={854}
                 height={468}
-                className="w-full h-full object-cover block cursor-pointer"
-                onClick={!hasInteracted ? handleStartWithSound : handlePlayPause}
+                className="w-full h-full object-cover block"
               />
 
               {/* Start overlay with YouTube / Play button (clean transparent backdrop so video image is visible) */}
@@ -170,7 +200,7 @@ export const InteractivePreviewSlider: React.FC = () => {
                     </div>
 
                     {/* Sound prompt banner */}
-                    <div className="mt-3.5 bg-[#051812]/95 border border-amber-400/60 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs sm:text-sm font-extrabold shadow-xl flex items-center gap-2 animate-bounce">
+                    <div className="mt-3.5 bg-[#4c090f]/95 border border-white/50 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs sm:text-sm font-extrabold shadow-xl flex items-center gap-2 animate-bounce">
                       <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
                       <span className="text-amber-300 uppercase tracking-wide">Clique para ver o vídeo com som</span>
                       <span className="text-sm">🔊</span>
@@ -287,10 +317,10 @@ export const InteractivePreviewSlider: React.FC = () => {
         <div className="mt-8 flex justify-center">
           <a
             href="#sim"
-            className="animate-pulse-green inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 via-emerald-600 to-green-700 hover:from-emerald-400 hover:to-green-600 text-white font-extrabold text-xs sm:text-sm py-3 px-6 sm:px-8 rounded-full uppercase tracking-wider shadow-[0_10px_25px_rgba(16,185,129,0.35)] border-2 border-white/90 transition-all transform hover:-translate-y-0.5 hover:scale-[1.02] cursor-pointer"
+            className="animate-pulse-neon inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#00E676] via-[#00FF66] to-[#05DF72] hover:from-[#00FF66] hover:to-[#00E676] text-slate-950 font-black text-xs sm:text-sm py-3 px-6 sm:px-8 rounded-full uppercase tracking-wider shadow-[0_0_25px_rgba(0,255,102,0.65),0_10px_25px_rgba(0,0,0,0.5)] border-2 border-white transition-all transform hover:-translate-y-0.5 hover:scale-[1.03] active:scale-98 cursor-pointer"
           >
             <span>QUERO ESSES MODELOS PARA IMPRIMIR</span>
-            <svg className="w-4 h-4 stroke-current stroke-[2.5] fill-none shrink-0" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 stroke-current stroke-[3] fill-none shrink-0" viewBox="0 0 24 24">
               <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" strokeLinejoin="round" />
               <polyline points="12 5 19 12 12 19" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

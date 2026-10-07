@@ -163,7 +163,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ className = '' }) => {
               </div>
 
               {/* Sound prompt banner */}
-              <div className="mt-4 bg-[#0a1f18]/90 border border-amber-400/60 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs sm:text-sm font-extrabold shadow-xl flex items-center gap-2 animate-bounce">
+              <div className="mt-4 bg-[#4c090f]/95 border border-white/60 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs sm:text-sm font-extrabold shadow-xl flex items-center gap-2 animate-bounce">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
                 <span className="text-amber-300 uppercase tracking-wide">Clique para ouvir</span>
                 <span className="text-base">🔊</span>

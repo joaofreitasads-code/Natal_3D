@@ -50,7 +50,7 @@ export const BenefitsSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative w-full bg-[#F8FAF9] py-16 md:py-24 px-4 text-center overflow-hidden border-b border-emerald-950/5">
+    <section className="relative w-full bg-white py-16 md:py-24 px-4 text-center overflow-hidden border-b border-red-100/60">
       <div className="max-w-6xl mx-auto relative z-10">
         <h2 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] mb-12 tracking-tight leading-tight max-w-4xl mx-auto">
           Veja como esse pack pode ajudar você a{' '}
@@ -64,9 +64,9 @@ export const BenefitsSection: React.FC = () => {
           {benefits.map((benefit, idx) => (
             <div
               key={idx}
-              className={`bg-white border border-slate-200/80 rounded-[24px] p-7 md:p-8 flex flex-col items-center text-center shadow-[0_8px_25px_rgba(15,23,42,0.04)] hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(15,23,42,0.08)] hover:border-emerald-500/40 transition-all duration-300 group ${benefit.className}`}
+              className={`bg-white border border-slate-200/80 rounded-[24px] p-7 md:p-8 flex flex-col items-center text-center shadow-[0_8px_25px_rgba(15,23,42,0.04)] hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(220,38,38,0.08)] hover:border-red-500/40 transition-all duration-300 group ${benefit.className}`}
             >
-              <div className="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-200/60 flex items-center justify-center text-emerald-700 mb-5 shadow-xs group-hover:scale-105 group-hover:bg-gradient-to-br group-hover:from-emerald-600 group-hover:to-emerald-800 group-hover:text-white transition-all duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-red-50 border border-red-200/60 flex items-center justify-center text-red-600 mb-5 shadow-xs group-hover:scale-105 group-hover:bg-gradient-to-br group-hover:from-red-600 group-hover:to-red-800 group-hover:text-white transition-all duration-300">
                 <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
                   {benefit.icon}
                 </svg>

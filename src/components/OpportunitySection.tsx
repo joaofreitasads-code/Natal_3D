@@ -4,13 +4,13 @@ export const OpportunitySection: React.FC = () => {
   return (
     <section
       id="oportunidade-natal"
-      className="relative w-full bg-[#F8FAF9] py-16 md:py-24 px-4 text-center overflow-hidden border-b border-emerald-950/5"
+      className="relative w-full bg-white py-16 md:py-24 px-4 text-center overflow-hidden border-b border-red-100/60"
     >
       <div
         className="absolute -top-16 left-1/2 -translate-x-1/2 w-[340px] md:w-[650px] h-[220px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(rgba(16, 185, 129, 0.08) 0%, rgba(220, 38, 38, 0.04) 45%, transparent 75%)',
+            'radial-gradient(rgba(220, 38, 38, 0.08) 0%, rgba(245, 158, 11, 0.05) 45%, transparent 75%)',
         }}
       />
 
@@ -24,7 +24,7 @@ export const OpportunitySection: React.FC = () => {
         </h2>
 
         <div className="w-full max-w-xl mx-auto mb-9 flex justify-center">
-          <div className="p-1 rounded-[26px] bg-gradient-to-br from-amber-300/80 via-red-500/60 to-emerald-600/60 shadow-[0_20px_45px_-12px_rgba(15,23,42,0.12)] hover:-translate-y-1 transition-all duration-300">
+          <div className="p-1 rounded-[26px] bg-gradient-to-br from-red-500 via-amber-300 to-rose-600 shadow-[0_20px_45px_-12px_rgba(220,38,38,0.2)] hover:-translate-y-1 transition-all duration-300">
             <div className="bg-white rounded-[22px] overflow-hidden">
               <img
                 alt="Oportunidade de Vendas de Modelos STL no Natal"

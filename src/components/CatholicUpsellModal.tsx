@@ -61,10 +61,10 @@ export const CatholicUpsellModal: React.FC<CatholicUpsellModalProps> = ({ isOpen
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-sm sm:max-w-md my-auto p-0.5 sm:p-1 rounded-[22px] bg-gradient-to-br from-amber-300 via-red-500 to-emerald-600 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_30px_rgba(245,158,11,0.3)]"
+        className="relative w-full max-w-sm sm:max-w-md my-auto p-0.5 sm:p-1 rounded-[22px] bg-gradient-to-br from-amber-300 via-rose-500 to-red-600 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_30px_rgba(220,38,38,0.4)]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-[#041C14] rounded-[20px] p-3 sm:p-4 md:p-5 flex flex-col items-center text-center relative max-h-[95vh]">
+        <div className="bg-[#4c090f] rounded-[20px] p-3 sm:p-4 md:p-5 flex flex-col items-center text-center relative max-h-[95vh]">
           {/* Close button */}
           <button
             type="button"
@@ -88,7 +88,7 @@ export const CatholicUpsellModal: React.FC<CatholicUpsellModalProps> = ({ isOpen
 
           <p className="text-[11px] sm:text-xs text-amber-200 leading-tight mb-1.5 font-medium px-1">
             Pague{' '}
-            <strong className="text-emerald-300 font-extrabold underline">
+            <strong className="text-amber-300 font-extrabold underline">
               só a diferença de +R$ 7
             </strong>{' '}
             sobre o Completo e leve os 2 packs por{' '}
@@ -121,7 +121,7 @@ export const CatholicUpsellModal: React.FC<CatholicUpsellModalProps> = ({ isOpen
                 height={144}
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute top-1.5 left-1.5 bg-[#041C14]/90 border border-amber-400/60 text-amber-300 text-[9px] font-extrabold px-2 py-0.5 rounded-full backdrop-blur-xs">
+              <div className="absolute top-1.5 left-1.5 bg-[#4c090f]/90 border border-amber-400/60 text-amber-300 text-[9px] font-extrabold px-2 py-0.5 rounded-full backdrop-blur-xs">
                 ✨ +500 STLs
               </div>
               <span className="absolute bottom-1.5 right-1.5 bg-black/80 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-white/20">
@@ -202,13 +202,13 @@ export const CatholicUpsellModal: React.FC<CatholicUpsellModalProps> = ({ isOpen
                 }
                 onClose();
               }}
-              className="animate-pulse-green w-full py-2.5 sm:py-3 px-3 rounded-xl bg-gradient-to-r from-[#1EB954] via-[#22C55E] to-[#15803D] hover:from-[#22C55E] hover:to-[#166534] text-white font-black text-xs sm:text-sm uppercase tracking-wide shadow-lg border border-white/80 transition-all transform hover:scale-[1.01] active:scale-98 cursor-pointer flex flex-col items-center justify-center leading-tight gap-0.5"
+              className="animate-pulse-neon w-full py-2.5 sm:py-3 px-3 rounded-xl bg-gradient-to-r from-[#00E676] via-[#00FF66] to-[#05DF72] hover:from-[#00FF66] hover:to-[#00E676] text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wide shadow-lg border border-white transition-all transform hover:scale-[1.02] active:scale-98 cursor-pointer flex flex-col items-center justify-center leading-tight gap-0.5"
             >
               <div className="flex items-center gap-1">
                 <span>✅</span>
                 <span>SIM! QUERO OS 2 PACKS POR R$ 36,90</span>
               </div>
-              <span className="text-[9px] sm:text-[10px] text-white/90 font-normal normal-case">
+              <span className="text-[9px] sm:text-[10px] text-slate-900 font-bold normal-case">
                 Pague só a diferença de R$ 7 no checkout
               </span>
             </a>
