@@ -25,6 +25,16 @@ export const CatholicUpsellModal: React.FC<CatholicUpsellModalProps> = ({ isOpen
     return () => clearInterval(interval);
   }, [isOpen]);
 
+  // Preload all modal images when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      images.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    }
+  }, [isOpen, images]);
+
   // Next / Prev slide handlers
   const handleNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % total);
@@ -110,17 +120,25 @@ export const CatholicUpsellModal: React.FC<CatholicUpsellModalProps> = ({ isOpen
             }}
           >
             <div className="relative h-28 sm:h-36 w-full rounded-xl overflow-hidden shadow-lg bg-black/60 border border-amber-400/40">
-              <img
-                key={currentIndex}
-                src={images[currentIndex]}
-                alt={`Modelo STL Católico ${currentIndex + 1}`}
-                className="w-full h-full object-contain p-1 transition-opacity duration-300"
-                loading="lazy"
-                decoding="async"
-                width={320}
-                height={144}
-                referrerPolicy="no-referrer"
-              />
+              <div
+                className="flex w-full h-full transition-transform duration-300 ease-out will-change-transform"
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              >
+                {images.map((imgSrc, idx) => (
+                  <div key={idx} className="w-full h-full shrink-0 flex items-center justify-center p-1">
+                    <img
+                      src={imgSrc}
+                      alt={`Modelo STL Católico ${idx + 1}`}
+                      className="w-full h-full object-contain"
+                      loading="eager"
+                      decoding="sync"
+                      width={320}
+                      height={144}
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                ))}
+              </div>
               <div className="absolute top-1.5 left-1.5 bg-[#4c090f]/90 border border-amber-400/60 text-amber-300 text-[9px] font-extrabold px-2 py-0.5 rounded-full backdrop-blur-xs">
                 ✨ +500 STLs
               </div>

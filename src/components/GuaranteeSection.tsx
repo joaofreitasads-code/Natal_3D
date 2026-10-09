@@ -33,7 +33,7 @@ export const GuaranteeSection: React.FC = () => {
             Você tem <strong className="font-bold text-red-700">7 dias de garantia incondicional</strong> para avaliar todo o material.
           </p>
           <p>
-            Acesse os <strong className="font-bold text-[#0F172A]">100 arquivos STL Natalinos</strong> hoje. Se por qualquer motivo você achar que os modelos não são perfeitos para o seu negócio, basta solicitar o reembolso e <strong className="font-bold text-red-700">devolvemos 100% do seu dinheiro.</strong>
+            Acesse os <strong className="font-bold text-[#0F172A]">+200 arquivos STL Natalinos</strong> hoje. Se por qualquer motivo você achar que os modelos não são perfeitos para o seu negócio, basta solicitar o reembolso e <strong className="font-bold text-red-700">devolvemos 100% do seu dinheiro.</strong>
           </p>
           <p>
             Sem letras miúdas e sem burocracia. <strong className="font-bold text-[#0F172A]">O risco é todo nosso.</strong>

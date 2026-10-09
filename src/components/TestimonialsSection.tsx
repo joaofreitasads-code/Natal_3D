@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TESTIMONIALS } from '../data/landingData';
 
 export const TestimonialsSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(3); // Camila Santos is default in template
   const [touchStart, setTouchStart] = useState<number | null>(null);
+
+  // Preload all testimonial images into memory on mount
+  useEffect(() => {
+    TESTIMONIALS.forEach((item) => {
+      const img = new Image();
+      img.src = item.image;
+    });
+  }, []);
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? TESTIMONIALS.length - 1 : prev - 1));

@@ -192,7 +192,7 @@ export const FAQ_LIST: FAQItem[] = [
   {
     id: "faq-1",
     question: "Como recebo o material?",
-    answer: "Assim que o pagamento for aprovado, você receberá imediatamente no seu e-mail cadastrado o link de acesso à área de membros para baixar todos os 100 arquivos STL e os bônus exclusivos.",
+    answer: "Assim que o pagamento for aprovado, você receberá imediatamente no seu e-mail cadastrado o link de acesso à área de membros para baixar todos os +200 arquivos STL e os bônus exclusivos.",
   },
   {
     id: "faq-2",

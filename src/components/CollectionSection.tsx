@@ -17,7 +17,7 @@ export const CollectionSection: React.FC = () => {
 
         <div className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-12">
           <p>
-            Tenha acesso a uma coleção com 100 modelos STL Natalinos para imprimir, produzir e colocar à venda enquanto a procura de fim de ano está no pico mais aquecido.
+            Tenha acesso a uma coleção com +200 modelos STL Natalinos para imprimir, produzir e colocar à venda enquanto a procura de fim de ano está no pico mais aquecido.
           </p>
           <p className="mt-4 font-bold text-red-700">No acervo você encontra modelos como:</p>
         </div>

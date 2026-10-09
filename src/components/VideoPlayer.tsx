@@ -14,10 +14,18 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ className = '' }) => {
   const videoStream = 'https://cdn.converteai.net/304351db-6700-41f2-96e0-9e2270c2922f/6aa18c886ce493f207c2e487/main.m3u8';
   const posterUrl = '/optimized/thumbnail_83a52e5a5d.webp';
 
-  // Initialize HLS / native stream only on click / interaction
+  // Initialize HLS / native stream
   const initVideo = useCallback(async (shouldPlay = false) => {
     const video = videoRef.current;
-    if (!video || hlsInstanceRef.current || video.src) return;
+    if (!video) return;
+
+    if (hlsInstanceRef.current || video.src) {
+      if (shouldPlay && video.paused) {
+        video.muted = false;
+        video.play().catch(() => {});
+      }
+      return;
+    }
 
     // Native HLS support (Safari iOS / macOS)
     if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -31,29 +39,41 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ className = '' }) => {
     }
 
     // Chrome / Firefox / Android with dynamic import of Hls.js
-    const HlsModule = await import('hls.js');
-    const Hls = HlsModule.default;
+    try {
+      const HlsModule = await import('hls.js');
+      const Hls = HlsModule.default;
 
-    if (Hls.isSupported()) {
-      const hls = new Hls({
-        autoStartLoad: true,
-        enableWorker: true,
-        capLevelToPlayerSize: true,
-        maxBufferLength: 8,
-        maxMaxBufferLength: 15,
-      });
-      hlsInstanceRef.current = hls;
-      hls.loadSource(videoStream);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        video.muted = false;
-        video.volume = 1;
-        if (shouldPlay) {
-          video.play().catch(() => {});
-        }
-      });
+      if (Hls.isSupported()) {
+        const hls = new Hls({
+          autoStartLoad: true,
+          enableWorker: true,
+          capLevelToPlayerSize: true,
+          maxBufferLength: 10,
+          maxMaxBufferLength: 20,
+        });
+        hlsInstanceRef.current = hls;
+        hls.loadSource(videoStream);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          if (shouldPlay) {
+            video.muted = false;
+            video.volume = 1;
+            video.play().catch(() => {});
+          }
+        });
+      }
+    } catch (err) {
+      console.warn('HLS init error:', err);
     }
   }, [videoStream]);
+
+  // Pre-warm the video connection shortly after page load so it plays instantly
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      initVideo(false);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, [initVideo]);
 
   // Handle timeupdate and playback states
   useEffect(() => {

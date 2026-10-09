@@ -29,8 +29,9 @@ export const OpportunitySection: React.FC = () => {
               <img
                 alt="Oportunidade de Vendas de Modelos STL no Natal"
                 className="w-full h-auto object-cover rounded-[22px] block"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
+                fetchPriority="high"
                 width="576"
                 height="576"
                 referrerPolicy="no-referrer"

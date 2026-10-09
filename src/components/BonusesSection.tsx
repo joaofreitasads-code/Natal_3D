@@ -18,7 +18,7 @@ export const BonusesSection: React.FC = () => {
           E NÃO PARA POR AÍ... TEM MAIS!
         </h2>
         <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-12">
-          Além dos 100 arquivos STL Natalinos, você também vai receber...
+          Além dos +200 arquivos STL Natalinos, você também vai receber...
         </p>
 
         {/* 3 Bonus Cards */}

@@ -172,7 +172,7 @@ export const InteractivePreviewSlider: React.FC = () => {
               <video
                 ref={videoRef}
                 playsInline
-                preload="metadata"
+                preload="auto"
                 poster={posterUrl}
                 src={currentSrc}
                 onError={handleVideoError}
@@ -290,7 +290,7 @@ export const InteractivePreviewSlider: React.FC = () => {
         {/* Mini Preview of STL Models below video */}
         <div className="mt-8 pt-6 border-t border-white/10 max-w-2xl mx-auto">
           <p className="text-xs uppercase tracking-wider text-amber-300 font-bold mb-3">
-            ✨ Alguns dos 100 modelos disponíveis para você imprimir:
+            ✨ Alguns dos +200 modelos disponíveis para você imprimir:
           </p>
           <div className="grid grid-cols-5 gap-2 sm:gap-3">
             {PREVIEW_MODELS.map((item, idx) => (

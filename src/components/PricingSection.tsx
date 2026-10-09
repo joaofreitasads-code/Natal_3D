@@ -61,7 +61,7 @@ export const PricingSection: React.FC = () => {
                 <ul className="flex flex-col gap-4 text-xs sm:text-sm text-slate-200">
                   <li className="flex items-start gap-2.5">
                     <span className="text-slate-400 font-bold shrink-0">✓</span>
-                    <span>Pack com +100 arquivos STL</span>
+                    <span>Pack com +200 arquivos STL</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-slate-400">
                     <span className="text-slate-500 font-bold shrink-0">✕</span>

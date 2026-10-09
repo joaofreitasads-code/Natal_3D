@@ -29,10 +29,11 @@ export const IncludedVideoSection: React.FC = () => {
               <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-red-900/30 bg-gradient-to-b from-[#88131f] to-[#500a12] p-5 text-center">
                 <div className="relative w-full flex justify-center items-center py-2">
                   <img
-                    alt="100 Modelos STL Natalinos - Pacote Completo"
+                    alt="+200 Modelos STL Natalinos - Pacote Completo"
                     className="w-full h-auto max-h-[340px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)] select-none pointer-events-none"
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
+                    fetchPriority="high"
                     width={380}
                     height={280}
                     src="/optimized/M4QGwBZ.webp"
@@ -40,7 +41,7 @@ export const IncludedVideoSection: React.FC = () => {
                 </div>
                 <div className="mt-2 bg-white/10 border border-amber-400/40 backdrop-blur-md px-3.5 py-1.5 rounded-full inline-flex items-center gap-2 text-amber-300 text-xs font-bold">
                   <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-                  100 Modelos Testados e Prontos
+                  +200 Modelos Testados e Prontos
                 </div>
                 <p className="text-slate-100 text-xs mt-3 leading-relaxed font-medium">
                   Acesso imediato à pasta organizada com arquivos .STL em alta resolução para fatiamento em qualquer impressora 3D.
@@ -58,7 +59,7 @@ export const IncludedVideoSection: React.FC = () => {
             <div className="lg:col-span-7 flex flex-col justify-center">
               <ul className="flex flex-col gap-3.5 text-left">
                 {[
-                  '100 arquivos STL Natalinos prontos para imprimir e vender',
+                  '+200 arquivos STL Natalinos prontos para imprimir e vender',
                   'Modelos variados de Papai Noel, enfeites, decorações, presentes e peças temáticas',
                   'Arquivos criativos, chamativos e com forte apelo para vendas de fim de ano',
                   'Tudo pronto para uso, sem precisar modelar ou criar arquivos do zero',
