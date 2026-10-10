@@ -156,6 +156,16 @@
   backface-visibility: hidden;
 }
 
+/* Rendering Performance Optimizations */
+img, video {
+  content-visibility: auto;
+}
+
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;

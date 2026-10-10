@@ -67,12 +67,19 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ className = '' }) => {
     }
   }, [videoStream]);
 
-  // Pre-warm the video connection shortly after page load so it plays instantly
+  // Pre-warm the video connection immediately on idle so it plays without delay
   useEffect(() => {
-    const timer = setTimeout(() => {
-      initVideo(false);
-    }, 1200);
-    return () => clearTimeout(timer);
+    if ('requestIdleCallback' in window) {
+      const handle = (window as any).requestIdleCallback(() => {
+        initVideo(false);
+      });
+      return () => (window as any).cancelIdleCallback(handle);
+    } else {
+      const timer = setTimeout(() => {
+        initVideo(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
   }, [initVideo]);
 
   // Handle timeupdate and playback states
@@ -153,7 +160,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ className = '' }) => {
         <video
           ref={videoRef}
           playsInline
-          preload="none"
+          preload="auto"
           poster={posterUrl}
           width={360}
           height={640}
